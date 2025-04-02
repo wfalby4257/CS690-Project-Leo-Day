@@ -19,7 +19,7 @@ class Program
         switch (selected) {
             case "1":
                 Console.WriteLine("Buy a Koffee was selected.");
-                buyAKoffee();
+                buyAKoffee(koffeePrice);
                 break;
 
             case "2":
@@ -60,7 +60,7 @@ class Program
         }
     }
 
-    public static void buyAKoffee() {
+    public static void buyAKoffee(string koffeePrice) {
         var types = new [] {" 1 Americano", " 2 Cappuccino", " 3 DoubleDouble", " 4 Expresso", " 5 Latte"};
 
         //Write main menu
@@ -71,6 +71,8 @@ class Program
         switch (type) {
             case "1":
                 Console.WriteLine("Americano selected");
+                Koffee cupOfKoffee = new Koffee(double.Parse(koffeePrice), 1, "Americano");
+                cupOfKoffee.showKoffee();
                 break;
 
             case "2":
