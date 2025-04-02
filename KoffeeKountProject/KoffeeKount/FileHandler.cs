@@ -2,6 +2,7 @@ namespace KoffeeKount;
 using System.IO;
 
 public class KoffeeFileHandler {
+    string fileName = "KoffeePurchases.txt";
     public string getKoffeePrice() {
         string koffeePrice = "";
         try {
@@ -24,8 +25,6 @@ public class KoffeeFileHandler {
 
     public void writeKoffeeInfo(Koffee cupOfKoffee) {
         //If file not found, create it
-        string fileName = "KoffeePurchases.txt";
-
         if (!File.Exists(fileName)) {
             try {
                 File.Create(fileName).Close();
@@ -37,7 +36,8 @@ public class KoffeeFileHandler {
         }
 
         //Write data to file
-        File.AppendAllText(fileName, cupOfKoffee.ToString());
+        string strData = string.Format("{0},{1},{2},{3},{4};", cupOfKoffee.dateAdded, cupOfKoffee.price, cupOfKoffee.count, cupOfKoffee.type, cupOfKoffee.dayNumber);
+        File.AppendAllText(fileName, strData);
     }
 
 

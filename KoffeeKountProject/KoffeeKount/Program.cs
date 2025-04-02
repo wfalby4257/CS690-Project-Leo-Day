@@ -74,7 +74,13 @@ class Program
                 Console.WriteLine("Americano selected");
                 Koffee cupOfKoffee = new Koffee(double.Parse(koffeePrice), 1, "Americano");
                 cupOfKoffee.showKoffee();
-                koffeeFH.writeKoffeeInfo(cupOfKoffee);
+                try {
+                    koffeeFH.writeKoffeeInfo(cupOfKoffee);
+                }
+                catch (ArgumentException ex) {
+                    Console.WriteLine("Failed writing Koffee data!");
+                    Console.WriteLine(ex.Message);
+                }                
                 break;
 
             case "2":
