@@ -9,7 +9,8 @@ class Program
                                 " ", " 99 Exit"};
         
         //Get the base price for cup of Koffee
-        string koffeePrice = getKoffeePrice();
+        KoffeeFileHandler koffeeFH = new KoffeeFileHandler();
+        string koffeePrice = koffeeFH.getKoffeePrice();
 
         //Write main menu to console
         Console.WriteLine("Select one of the following actions (use the number):");
@@ -19,7 +20,7 @@ class Program
         switch (selected) {
             case "1":
                 Console.WriteLine("Buy a Koffee was selected.");
-                buyAKoffee(koffeePrice);
+                buyAKoffee(koffeePrice, koffeeFH);
                 break;
 
             case "2":
@@ -60,7 +61,7 @@ class Program
         }
     }
 
-    public static void buyAKoffee(string koffeePrice) {
+    public static void buyAKoffee(string koffeePrice, KoffeeFileHandler koffeeFH) {
         var types = new [] {" 1 Americano", " 2 Cappuccino", " 3 DoubleDouble", " 4 Expresso", " 5 Latte"};
 
         //Write main menu
@@ -73,6 +74,7 @@ class Program
                 Console.WriteLine("Americano selected");
                 Koffee cupOfKoffee = new Koffee(double.Parse(koffeePrice), 1, "Americano");
                 cupOfKoffee.showKoffee();
+                koffeeFH.writeKoffeeInfo(cupOfKoffee);
                 break;
 
             case "2":

@@ -25,8 +25,3 @@ public class Koffee {
     }
     
 }
-
-public class Reminder {
-    public string dateAdded;
-    
-}
