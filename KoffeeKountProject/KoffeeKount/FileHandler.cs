@@ -40,5 +40,27 @@ public class KoffeeFileHandler {
         File.AppendAllText(fileName, strData);
     }
 
-
+    public void getKoffeeCount () {
+        //If file does not exist, throw not found exception
+        if (!File.Exists(fileName)) {
+            throw new FileNotFoundException("Koffee purchases file not found");
+        }
+        else {
+            string koffeeData = File.ReadAllText(fileName);
+            string [] purchases = koffeeData.Split(';');
+            foreach (string purchase in purchases) {
+                Console.WriteLine(purchase);
+            }
+        }
+    }
+    public void deleteKoffeeFile() {
+        //Is there a file?
+        if (!File.Exists(fileName)) {
+            Console.WriteLine("The Koffee purchases file was not found");
+        }
+        else {
+            File.Delete(fileName);
+            Console.WriteLine("The Koffee purchases file was deleted.");
+        }
+    }
 }
