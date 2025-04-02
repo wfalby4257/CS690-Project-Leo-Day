@@ -50,6 +50,12 @@ public class KoffeeFileHandler {
             string [] purchases = koffeeData.Split(';');
             foreach (string purchase in purchases) {
                 Console.WriteLine(purchase);
+                string [] fields = purchase.Split(',');
+                DateTime dateAdded = DateTime.Parse(fields[0]);
+                double price = double.Parse(fields[1]);
+                int count = int.Parse(fields[2]);
+                string type = fields[3];
+                int dayNumber = int.Parse(fields[4]);
             }
         }
     }
