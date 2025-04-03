@@ -12,6 +12,8 @@ class Program
         KoffeeFileHandler koffeeFH = new KoffeeFileHandler();
         string koffeePrice = koffeeFH.getKoffeePrice();
 
+        LogFileHandler logFH = new LogFileHandler();
+
         //Write main menu to console
         Console.WriteLine("Select one of the following actions (use the number):");
         Console.WriteLine(String.Join(Environment.NewLine, selections));
@@ -34,6 +36,7 @@ class Program
 
             case "4":
                 Console.WriteLine("Create a Log entry was selected.");
+                writeLogEntry(logFH);
                 break;
 
             case "5":
@@ -50,7 +53,7 @@ class Program
 
             case "8":
                 Console.WriteLine("Reset files was selected.");
-                resetFiles(koffeeFH);
+                resetFiles(koffeeFH, logFH);
                 break;
 
             case "99":
@@ -133,7 +136,7 @@ class Program
         }
     }
 
-    public static void resetFiles(KoffeeFileHandler koffeeFH) {
+    public static void resetFiles(KoffeeFileHandler koffeeFH, LogFileHandler logFH) {
         var options = new [] {" 1 All", " 2 Log entries", " 3 Reminders", " 4 Koffee"};
 
         //Write menu
@@ -148,6 +151,7 @@ class Program
 
             case "2":
                 Console.WriteLine("Log entries file to be deleted");
+                logFH.deleteLogFile();
                 break;
 
             case "3":
@@ -164,5 +168,18 @@ class Program
                 break;
         }
 
+    }
+
+    public static void writeLogEntry(LogFileHandler logFH) {
+        Console.WriteLine("Enter Log entry.");
+
+        string logData = Console.ReadLine();
+
+        try {
+            logFH.writeLogEntry(logData);
+        }
+        catch (ArgumentException ex) {
+            Console.WriteLine(ex.Message);
+        }
     }
 }

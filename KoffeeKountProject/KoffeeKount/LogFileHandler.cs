@@ -27,7 +27,7 @@ public class LogFileHandler {
             Console.WriteLine("The Log entries file was not found");
         }
         else {
-            File.Delete(fileName);
+            File.Delete(logFileName);
             Console.WriteLine("The Log entries file was deleted.");
         }
     }
