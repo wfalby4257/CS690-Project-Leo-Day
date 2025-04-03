@@ -114,13 +114,19 @@ class Program
     }
 
     public static void getKoffeeCount(KoffeeFileHandler koffeeFH) {
+        int totalKoffeeCount = 0;
+
         Console.WriteLine("Enter range in number of days: ");
         int days = int.Parse(Console.ReadLine());
         try {
-            koffeeFH.getKoffeeCount();
+            totalKoffeeCount = koffeeFH.getKoffeeCount(days);
         }
         catch (FileNotFoundException ex) {
             Console.WriteLine(" You have not made any Koffee purchases in the last " + days + " days.");
+        }
+
+        if (totalKoffeeCount > 0) {
+            Console.WriteLine("Number of Koffees purchased in the last " + days + ": " + totalKoffeeCount); 
         }
     }
 

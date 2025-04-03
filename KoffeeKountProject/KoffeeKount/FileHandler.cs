@@ -40,24 +40,37 @@ public class KoffeeFileHandler {
         File.AppendAllText(fileName, strData);
     }
 
-    public void getKoffeeCount () {
+    public int getKoffeeCount (int days) {
+        int totalKoffeeCount = 0;
+        int dayNumber = 0;
+        int currentDay = 0;
+        int lastDayNumber = 0;
+        string [] fields = null;
+
         //If file does not exist, throw not found exception
         if (!File.Exists(fileName)) {
             throw new FileNotFoundException("Koffee purchases file not found");
         }
         else {
+            //This approach may not work well for millions of entries, should be fine for thousands
             string koffeeData = File.ReadAllText(fileName);
             string [] purchases = koffeeData.Split(';');
             foreach (string purchase in purchases) {
                 Console.WriteLine(purchase);
-                string [] fields = purchase.Split(',');
-                DateTime dateAdded = DateTime.Parse(fields[0]);
-                double price = double.Parse(fields[1]);
-                int count = int.Parse(fields[2]);
-                string type = fields[3];
-                int dayNumber = int.Parse(fields[4]);
+                fields = purchase.Split(',');
+                Console.WriteLine(fields[0]);
+                Console.WriteLine(fields[1]);
+                Console.WriteLine(fields[2]);
+                Console.WriteLine(fields[3]);
+                Console.WriteLine(fields[4]);
+                lastDayNumber = DateTime.Now.DayOfYear - days;
+                if (int.Parse(fields[4]) >= lastDayNumber) {
+                    totalKoffeeCount += int.Parse(fields[2]);
+                }
             }
         }
+
+        return totalKoffeeCount;
     }
     public void deleteKoffeeFile() {
         //Is there a file?
