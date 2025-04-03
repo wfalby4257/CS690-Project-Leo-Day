@@ -25,3 +25,19 @@ public class Koffee {
     }
     
 }
+
+public class Log {
+    public DateTime dateAdded;
+    public string logEntry;
+
+    public Log(string logEntry) {
+        this.logEntry = logEntry;
+        
+        this.dateAdded = DateTime.Now;
+    }
+
+    public void showLogEntry() {
+        Console.WriteLine(this.dateAdded);
+        Console.WriteLine(this.logEntry);
+    }
+}
