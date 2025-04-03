@@ -126,7 +126,10 @@ class Program
         }
 
         if (totalKoffeeCount > 0) {
-            Console.WriteLine("Number of Koffees purchased in the last " + days + ": " + totalKoffeeCount); 
+            Console.WriteLine("Number of Koffees purchased in the last " + days + " days: " + totalKoffeeCount); 
+        }
+        else {
+            Console.WriteLine(" You have not made any Koffee purchases in the last " + days + " days.");
         }
     }
 
