@@ -56,6 +56,9 @@ public class KoffeeFileHandler {
             string koffeeData = File.ReadAllText(fileName);
             string [] purchases = koffeeData.Split(';');
             foreach (string purchase in purchases) {
+                if (String.IsNullOrEmpty(purchase)) {
+                    continue;
+                }
                 Console.WriteLine(purchase);
                 fields = purchase.Split(',');
                 Console.WriteLine(fields[0]);
@@ -64,7 +67,8 @@ public class KoffeeFileHandler {
                 Console.WriteLine(fields[3]);
                 Console.WriteLine(fields[4]);
                 lastDayNumber = DateTime.Now.DayOfYear - days;
-                if (int.Parse(fields[4]) >= lastDayNumber) {
+                dayNumber = int.Parse(fields[4]);
+                if (dayNumber >= lastDayNumber) {
                     totalKoffeeCount += int.Parse(fields[2]);
                 }
             }
