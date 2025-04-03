@@ -61,11 +61,7 @@ public class KoffeeFileHandler {
                 }
                 Console.WriteLine(purchase);
                 fields = purchase.Split(',');
-                Console.WriteLine(fields[0]);
-                Console.WriteLine(fields[1]);
-                Console.WriteLine(fields[2]);
-                Console.WriteLine(fields[3]);
-                Console.WriteLine(fields[4]);
+                
                 lastDayNumber = DateTime.Now.DayOfYear - days;
                 dayNumber = int.Parse(fields[4]);
                 if (dayNumber >= lastDayNumber) {
