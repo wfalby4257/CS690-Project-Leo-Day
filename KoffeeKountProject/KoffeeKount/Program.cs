@@ -69,12 +69,13 @@ class Program
 
     public static void buyAKoffee(string koffeePrice, KoffeeFileHandler koffeeFH) {
         var types = new [] {" 1 Americano", " 2 Cappuccino", " 3 DoubleDouble", " 4 Expresso", " 5 Latte"};
+        string type = "";
 
         //Write main menu
-        Console.WriteLine("Make a selection (use the number):");
+        Console.WriteLine("Make a selection (use the number).");
         Console.WriteLine(String.Join(Environment.NewLine, types));
 
-        string type = Console.ReadLine();
+        type = Console.ReadLine();
         Koffee cupOfKoffee = null;
         switch (type) {
             case "1":
@@ -148,35 +149,41 @@ class Program
 
     public static void resetFiles(KoffeeFileHandler koffeeFH, LogFileHandler logFH) {
         var options = new [] {" 1 All", " 2 Log entries", " 3 Reminders", " 4 Koffee"};
+        string option = "";
 
         //Write menu
-        Console.WriteLine("Make a selection (use the number):");
+        Console.WriteLine("Make a selection (use the number). Enter Exit to terminate.");
         Console.WriteLine(String.Join(Environment.NewLine, options));
 
-        string option = Console.ReadLine();
-        switch(option) {
-            case "1":
-                Console.WriteLine("All files to be deleted");
-                break;
+        do {
+            option = Console.ReadLine();
+            switch(option) {
+                case "1":
+                    Console.WriteLine("All files to be deleted");
+                    break;
 
-            case "2":
-                Console.WriteLine("Log entries file to be deleted");
-                logFH.deleteLogFile();
-                break;
+                case "2":
+                    Console.WriteLine("Log entries file to be deleted");
+                    logFH.deleteLogFile();
+                    break;
 
-            case "3":
-                Console.WriteLine("Reminders file to be deleted");
-                break;
+                case "3":
+                    Console.WriteLine("Reminders file to be deleted");
+                    break;
 
-            case "4":
-                Console.WriteLine("Koffee purchases file to be deleted");
-                koffeeFH.deleteKoffeeFile();
-                break;
+                case "4":
+                    Console.WriteLine("Koffee purchases file to be deleted");
+                    koffeeFH.deleteKoffeeFile();
+                    break;
 
-            default:
-                Console.WriteLine("Invalid selection! Try Again.");
-                break;
-        }
+                case "Exit":
+                    break;
+
+                default:
+                    Console.WriteLine("Invalid selection! Try Again.");
+                    break;
+            }
+        } while (option != "Exit");
 
     }
 
