@@ -21,6 +21,38 @@ public class LogFileHandler {
         File.AppendAllText(logFileName, strData);
     }
 
+    public void listLogEntries() {
+        string [] fields = null;
+
+        if (!File.Exists(logFileName)) {
+            Console.WriteLine("The Log entries file was not found");
+        }
+        else {
+            //This approach may not work well for millions of entries, should be fine for thousands
+            string logData = File.ReadAllText(logFileName);
+            string [] logEntries = logData.Split(';');
+            foreach (string logEntry in logEntries) {
+                if (String.IsNullOrEmpty(logEntry)) {
+                    continue;
+                }
+            
+                fields = logEntry.Split(',');
+                Console.WriteLine("Log entry added date: " + fields[0]);
+                
+                //Write each sentence on separate line. Left justified.
+                Console.WriteLine("Log entry: ");
+                string [] lines = fields[1].Split('.');
+                foreach (string line in lines) {
+                    if (String.IsNullOrEmpty(line)) {
+                        continue;
+                    }
+                    Console.WriteLine(line.TrimStart() + '.');
+                }
+            }
+        }
+
+    }
+
     public void deleteLogFile() {
         //Is there a file?
         if (!File.Exists(logFileName)) {

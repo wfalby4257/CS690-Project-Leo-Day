@@ -40,11 +40,12 @@ class Program
                 break;
 
             case "5":
-                Console.WriteLine("List Reminders was selected.");
+                Console.WriteLine("List Reminders was selected.");                
                 break;
 
             case "6":
                 Console.WriteLine("List Log entries was selected.");
+                listLogEntries(logFH);
                 break;
 
             case "7":
@@ -136,6 +137,15 @@ class Program
         }
     }
 
+    public static void listLogEntries(LogFileHandler logFH) {
+        try {
+            logFH.listLogEntries();
+        }
+        catch (ArgumentException ex) {
+            Console.WriteLine(ex.Message);
+        }    
+    }
+
     public static void resetFiles(KoffeeFileHandler koffeeFH, LogFileHandler logFH) {
         var options = new [] {" 1 All", " 2 Log entries", " 3 Reminders", " 4 Koffee"};
 
@@ -177,6 +187,7 @@ class Program
 
         try {
             logFH.writeLogEntry(logData);
+            Console.WriteLine("Log entry saved.");
         }
         catch (ArgumentException ex) {
             Console.WriteLine(ex.Message);
