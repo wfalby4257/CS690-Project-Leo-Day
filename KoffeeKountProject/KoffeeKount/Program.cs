@@ -238,4 +238,50 @@ class Program
             Console.WriteLine(ex.Message);
         }
     }
+
+    public static void writeReminderEntry(ReminderFileHandler reminderFH) {        
+        int recurCount = 0;
+        int alertIntrvl = 0;
+
+
+        Console.WriteLine("Enter reminder entry.");
+
+        Console.WriteLine("Enter reminder trigger date (MM/DD/YYYY): ");
+        string triggerDate = Console.ReadLine();        
+        if (String.IsNullOrEmpty(triggerDate)) {            
+            Console.WriteLine("Enter a date value.");
+            return;
+        }
+
+        Console.WriteLine("Enter reminder trigger time (HH:MM AM/PM): ");
+        string triggerTime = Console.ReadLine();
+        if (String.IsNullOrEmpty(triggerDate)) {
+            Console.WriteLine("Enter a time value.");
+            return;
+        }
+
+        Console.WriteLine("Enter a recurrence count (optional): ");
+        string tempVar = Console.ReadLine();
+        if (!String.IsNullOrEmpty(tempVar)) {
+            recurCount = int.Parse(tempVar);                
+        }
+
+        Console.WriteLine("Enter an alert interval (optional): ");
+        tempVar = Console.ReadLine();
+        if (!String.IsNullOrEmpty(tempVar)) {
+            alertIntrvl = int.Parse(tempVar);                
+        }
+
+        Console.WriteLine("Enter a reminder note (optional): ");
+        string note = Console.ReadLine();
+        
+        Reminder reminder = new Reminder(triggerDate, triggerTime, recurCount, alertIntrvl, note); 
+        try {
+            reminderFH.writeReminderEntry(reminder);
+            Console.WriteLine("Reminder set for " + triggerDate + " at " + triggerTime + ".");
+        }
+        catch (ArgumentException ex) {
+            Console.WriteLine(ex.Message);
+        }
+    }
 }

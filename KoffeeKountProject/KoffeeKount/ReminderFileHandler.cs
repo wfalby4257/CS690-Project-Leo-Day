@@ -17,11 +17,9 @@ public class ReminderFileHandler {
         }
 
         //Write data to file
-        string strData = string.Format("{0},{1},{2},{3},{4}, {5};", reminderEntry.dateAdded, reminderEntry.triggerDate, reminderEntry.triggerTime, reminderEntry.recurCount, reminderEntry.alertIntrvl, reminderEntry.note);
+        string strData = string.Format("{0},{1},{2},{3},{4},{5};", reminderEntry.dateAdded, reminderEntry.triggerDate, reminderEntry.triggerTime, reminderEntry.recurCount, reminderEntry.alertIntrvl, reminderEntry.note);
         File.AppendAllText(reminderFileName, strData);
     }
-
-    
 
     public void listReminderEntries() {
         string [] fields = null;
