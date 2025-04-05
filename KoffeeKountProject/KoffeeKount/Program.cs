@@ -45,7 +45,8 @@ class Program
                     break;
 
                 case "5":
-                    Console.WriteLine("List Reminders was selected.");                
+                    Console.WriteLine("List Reminders was selected.");       
+                    listReminderEntries(reminderFH);         
                     break;
 
                 case "6":
@@ -283,5 +284,15 @@ class Program
         catch (ArgumentException ex) {
             Console.WriteLine(ex.Message);
         }
+    }
+
+    public static void listReminderEntries(ReminderFileHandler reminderFH) {
+        Console.WriteLine("listReminderEntries entered.");
+        try {
+            reminderFH.listReminderEntries();
+        }
+        catch (ArgumentException ex) {
+            Console.WriteLine(ex.Message);
+        }    
     }
 }

@@ -48,14 +48,8 @@ public class Reminder {
         Console.WriteLine("triggerDate = " + triggerDate);
         Console.WriteLine("triggerTime = " + triggerTime);
         Console.WriteLine("dateAdded = " + dateAdded);
-
-        if (recurCount > 0) {
-            Console.WriteLine("recurCount = " + recurCount);
-        }
-
-        if (alertIntrvl > 0) {
-            Console.WriteLine("alertIntrvl = " + alertIntrvl);
-        }
+        Console.WriteLine("recurCount = " + recurCount);
+        Console.WriteLine("alertIntrvl = " + alertIntrvl);
 
         if (!String.IsNullOrEmpty(note)) {
             Console.WriteLine("note = " + note);
