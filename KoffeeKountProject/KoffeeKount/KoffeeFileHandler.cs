@@ -11,6 +11,9 @@ public class KoffeeFileHandler {
 
             // Read the stream as a string.
             koffeePrice = reader.ReadLine();
+            if (String.IsNullOrEmpty(koffeePrice)) {
+                throw new ArgumentException("The file could not be read!");
+            }
             return(koffeePrice);
         }
         catch (FileNotFoundException ex) {
@@ -43,7 +46,6 @@ public class KoffeeFileHandler {
     public int getKoffeeCount (int days) {
         int totalKoffeeCount = 0;
         int dayNumber = 0;
-        int currentDay = 0;
         int lastDayNumber = 0;
         string [] fields = null;
 

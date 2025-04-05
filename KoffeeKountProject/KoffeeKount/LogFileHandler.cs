@@ -30,6 +30,11 @@ public class LogFileHandler {
         else {
             //This approach may not work well for millions of entries, should be fine for thousands
             string logData = File.ReadAllText(logFileName);
+            if (String.IsNullOrEmpty(logData)) {
+                Console.WriteLine("The log file could not be read!");
+                return;
+            }
+            
             string [] logEntries = logData.Split(';');
             foreach (string logEntry in logEntries) {
                 if (String.IsNullOrEmpty(logEntry)) {
