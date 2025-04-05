@@ -31,7 +31,7 @@ public class LogFileHandler {
             //This approach may not work well for millions of entries, should be fine for thousands
             string logData = File.ReadAllText(logFileName);
             if (String.IsNullOrEmpty(logData)) {
-                Console.WriteLine("The log file could not be read!");
+                Console.WriteLine("The Log entries file could not be read!");
                 return;
             }
             

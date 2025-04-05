@@ -15,6 +15,8 @@ class Program
 
         LogFileHandler logFH = new LogFileHandler();
 
+        ReminderFileHandler reminderFH = new ReminderFileHandler();
+
         do {
             //Write main menu to console
             Console.WriteLine("Select one of the following actions (use the number). Enter 99 to terminate.");
@@ -34,6 +36,7 @@ class Program
 
                 case "3":
                     Console.WriteLine("Set a Reminder was selected.");
+                    writeReminderEntry(reminderFH);
                     break;    
 
                 case "4":
@@ -56,7 +59,7 @@ class Program
 
                 case "8":
                     Console.WriteLine("Reset files was selected.");
-                    resetFiles(koffeeFH, logFH);
+                    resetFiles(koffeeFH, logFH, reminderFH);
                     break;
 
                 case "99":
@@ -174,7 +177,7 @@ class Program
         }    
     }
 
-    public static void resetFiles(KoffeeFileHandler koffeeFH, LogFileHandler logFH) {
+    public static void resetFiles(KoffeeFileHandler koffeeFH, LogFileHandler logFH, ReminderFileHandler reminderFH) {
         var options = new [] {" 1 All", " 2 Log entries", " 3 Reminders", " 4 Koffee"};
         string option = "";
 
@@ -192,6 +195,9 @@ class Program
             switch(option) {
                 case "1":
                     Console.WriteLine("All files to be deleted");
+                    logFH.deleteLogFile();
+                    reminderFH.deleteReminderFile();
+                    koffeeFH.deleteKoffeeFile();
                     break;
 
                 case "2":
@@ -201,6 +207,7 @@ class Program
 
                 case "3":
                     Console.WriteLine("Reminders file to be deleted");
+                    reminderFH.deleteReminderFile();
                     break;
 
                 case "4":
