@@ -1,6 +1,7 @@
 ﻿namespace KoffeeKount;
 
 using System.IO;
+using System.Text.RegularExpressions;
 class Program
 {
     static void Main(string[] args)
@@ -162,26 +163,23 @@ class Program
     public static void setBaseKoffeePrice(KoffeeFileHandler koffeeFH) {
         char validPrice = 'N';
         string price = "";
+        string pattern = @"^[0-9]*\.?[0-9]+$";
 
         do {
             Console.WriteLine("Enter base Koffee price. Format is 9.99 (Dollars and cents) ");
             price = Console.ReadLine();
             if (String.IsNullOrEmpty(price)) {
-                Console.WriteLine("The price could not be read! Try again.");                
+                Console.WriteLine("The price could not be read! Try again.");       
+                continue;         
             }
 
-            //Make sure only numbers or period
-            foreach (char c in price) {
-                if (c < '0' || c > '9') {
-                    if (c != '.') {
-                        Console.WriteLine("Invalid price entered! Try again.");
-                        continue;
-                    }
-                }
+            //Make sure only numbers and period
+            if (Regex.IsMatch(price, pattern)) {
+                validPrice = 'Y';
+            }            
+            else {
+                Console.WriteLine("Invalid input! Try again.");
             }
-
-            //Got valid price string
-            validPrice = 'Y';
         } while (validPrice == 'N');
 
         //Valid price entered, save it.
