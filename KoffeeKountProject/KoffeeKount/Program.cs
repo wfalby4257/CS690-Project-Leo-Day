@@ -22,57 +22,45 @@ class Program
             Console.WriteLine("Select one of the following actions (use the number). Enter 99 to terminate.");
             Console.WriteLine(String.Join(Environment.NewLine, selections));
 
+            Console.WriteLine("About to issue ReadLine.");
             selection = Console.ReadLine();
             Console.WriteLine("selection = " + selection);
-            switch (selection) {
-                case "1":
-                    Console.WriteLine("Buy a Koffee was selected.");
-                    buyAKoffee(koffeePrice, koffeeFH);
-                    break;
-
-                case "2":
-                    Console.WriteLine("Get Koffee count was selected.");
-                    getKoffeeCount(koffeeFH);
-                    break;
-
-                case "3":
-                    Console.WriteLine("Set a Reminder was selected.");
-                    writeReminderEntry(reminderFH);
-                    break;    
-
-                case "4":
-                    Console.WriteLine("Create a Log entry was selected.");
-                    writeLogEntry(logFH);
-                    break;
-
-                case "5":
-                    Console.WriteLine("List Reminders was selected.");
-                    listReminderEntries(reminderFH);
-                    break;
-
-                case "6":
-                    Console.WriteLine("List Log entries was selected.");
-                    listLogEntries(logFH);
-                    break;
-
-                case "7":
-                    Console.WriteLine("Set base Koffee price was selected.");
-                    setBaseKoffeePrice(koffeeFH);
-                    break;
-
-                case "8":
-                    Console.WriteLine("Reset files was selected.");
-                    resetFiles(koffeeFH, logFH, reminderFH);
-                    break;
-
-                case "99":
-                    Console.WriteLine("Leo has left the building.");
-                    break;
-
-                default:
-                    Console.WriteLine("Invalid selection! Try again.");
-                    break;
+            if (selection == "1") {
+                Console.WriteLine("Buy a Koffee was selected.");
+                buyAKoffee(koffeePrice, koffeeFH);
             }
+            else if (selection == "2") {
+                Console.WriteLine("Get Koffee count was selected.");
+                getKoffeeCount(koffeeFH);
+            }
+            else if (selection == "3") {
+                Console.WriteLine("Set a Reminder was selected.");
+                writeReminderEntry(reminderFH);
+            }
+            else if (selection == "4") {
+                Console.WriteLine("Create a Log entry was selected.");
+                writeLogEntry(logFH);
+            }
+            else if (selection == "5") {
+                Console.WriteLine("List Reminders was selected.");
+                listReminderEntries(reminderFH);
+            }
+            else if (selection == "6") {
+                Console.WriteLine("List Log entries was selected.");
+                listLogEntries(logFH);
+            }
+            else if (selection == "7") {
+                Console.WriteLine("Set base Koffee price was selected.");
+                setBaseKoffeePrice(koffeeFH);
+            }
+            else if (selection == "8") {
+                Console.WriteLine("Reset files was selected.");
+                resetFiles(koffeeFH, logFH, reminderFH);
+            }
+            else if (selection == "99") {
+                Console.WriteLine("Leo has left the building.");
+            }
+            
         } while (selection != "99");
     }
 
