@@ -23,6 +23,7 @@ class Program
             Console.WriteLine(String.Join(Environment.NewLine, selections));
 
             selection = Console.ReadLine();
+            Console.WriteLine("selection = " + selection);
             switch (selection) {
                 case "1":
                     Console.WriteLine("Buy a Koffee was selected.");
@@ -45,8 +46,8 @@ class Program
                     break;
 
                 case "5":
-                    Console.WriteLine("List Reminders was selected.");       
-                    listReminderEntries(reminderFH);         
+                    Console.WriteLine("List Reminders was selected.");
+                    listReminderEntries(reminderFH);
                     break;
 
                 case "6":
@@ -56,6 +57,7 @@ class Program
 
                 case "7":
                     Console.WriteLine("Set base Koffee price was selected.");
+                    setBaseKoffeePrice(koffeeFH);
                     break;
 
                 case "8":
@@ -169,6 +171,36 @@ class Program
         }
     }
 
+    public static void setBaseKoffeePrice(KoffeeFileHandler koffeeFH) {
+        char validPrice = 'N';
+        string price = "";
+
+        do {
+            Console.WriteLine("Enter base Koffee price. Format is 9.99 (Dollars and cents) ");
+            price = Console.ReadLine();
+            if (String.IsNullOrEmpty(price)) {
+                Console.WriteLine("The price could not be read! Try again.");                
+            }
+
+            //Make sure only numbers or period
+            foreach (char c in price) {
+                if (c < '0' || c > '9') {
+                    if (c != '.') {
+                        Console.WriteLine("Invalid price entered! Try again.");
+                        continue;
+                    }
+                }
+            }
+
+            //Got valid price string
+            validPrice = 'Y';
+        } while (validPrice == 'N');
+
+        //Valid price entered, save it.
+        koffeeFH.setBaseKoffeePrice(price);
+        Console.WriteLine("Base price " + price + " saved.");
+    }
+
     public static void listLogEntries(LogFileHandler logFH) {
         try {
             logFH.listLogEntries();
@@ -181,12 +213,11 @@ class Program
     public static void resetFiles(KoffeeFileHandler koffeeFH, LogFileHandler logFH, ReminderFileHandler reminderFH) {
         var options = new [] {" 1 All", " 2 Log entries", " 3 Reminders", " 4 Koffee"};
         string option = "";
-
-        //Write menu
-        Console.WriteLine("Make a selection (use the number). Enter Exit to terminate.");
-        Console.WriteLine(String.Join(Environment.NewLine, options));
-
         do {
+            //Write menu
+            Console.WriteLine("Make a selection (use the number). Enter Exit to terminate.");
+            Console.WriteLine(String.Join(Environment.NewLine, options));
+
             option = Console.ReadLine();
             if (String.IsNullOrEmpty(option)) {
                 Console.WriteLine("The input could not be read!");
@@ -199,6 +230,7 @@ class Program
                     logFH.deleteLogFile();
                     reminderFH.deleteReminderFile();
                     koffeeFH.deleteKoffeeFile();
+                    option = "Exit";  //Nothing more to be done
                     break;
 
                 case "2":

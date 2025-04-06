@@ -3,6 +3,7 @@ using System.IO;
 
 public class KoffeeFileHandler {
     string fileName = "KoffeePurchases.txt";
+    string priceFileName = "KoffeePrice.txt";
     public string getKoffeePrice() {
         string koffeePrice = "";
         try {
@@ -34,7 +35,7 @@ public class KoffeeFileHandler {
             }
             catch (Exception ex) {
                 Console.WriteLine(ex.Message);
-                throw new ArgumentException("Failed creating file", ex);
+                throw new ArgumentException("Failed creating Koffee base price file", ex);
             }
         }
 
@@ -74,6 +75,23 @@ public class KoffeeFileHandler {
 
         return totalKoffeeCount;
     }
+
+    public void setBaseKoffeePrice(string koffeePrice) {
+        //If file not found, create it
+        if (!File.Exists(priceFileName)) {
+            try {
+                File.Create(priceFileName).Close();
+            }
+            catch (Exception ex) {
+                Console.WriteLine(ex.Message);
+                throw new ArgumentException("Failed creating Koffee base price file", ex);
+            }
+        }
+
+        //Write data to file        
+        File.WriteAllText(priceFileName, koffeePrice);
+    }
+
     public void deleteKoffeeFile() {
         //Is there a file?
         if (!File.Exists(fileName)) {
@@ -83,5 +101,4 @@ public class KoffeeFileHandler {
             File.Delete(fileName);
             Console.WriteLine("The Koffee purchases file was deleted.");
         }
-    }
-}
+    }}
