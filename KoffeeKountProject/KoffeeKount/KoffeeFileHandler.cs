@@ -11,7 +11,7 @@ public class KoffeeFileHandler {
             using StreamReader reader = new("KoffeePrice.txt");
 
             // Read the stream as a string.
-            koffeePrice = reader.ReadLine();
+            koffeePrice = reader.ReadLine() ?? string.Empty;
             if (String.IsNullOrEmpty(koffeePrice)) {
                 throw new ArgumentException("The file could not be read!");
             }

@@ -24,7 +24,7 @@ class Program
             Console.WriteLine(String.Join(Environment.NewLine, selections));
 
             Console.WriteLine("About to issue ReadLine.");
-            selection = Console.ReadLine();
+            selection = Console.ReadLine() ?? string.Empty;
             Console.WriteLine("selection = " + selection);
             if (selection == "1") {
                 Console.WriteLine("Buy a Koffee was selected.");
@@ -76,7 +76,7 @@ class Program
             Console.WriteLine("Make a selection (use the number). Enter Exit to terminate.");
             Console.WriteLine(String.Join(Environment.NewLine, types));
 
-            type = Console.ReadLine();        
+            type = Console.ReadLine() ?? string.Empty;        
             if (String.IsNullOrEmpty(type)) {
                 Console.WriteLine("The input could not be read!");
                 //Prepare to exit the method
@@ -142,14 +142,19 @@ class Program
 
     public static void getKoffeeCount(KoffeeFileHandler koffeeFH) {
         int totalKoffeeCount = 0;
+        int days = 0;
 
         Console.WriteLine("Enter range in number of days: ");
-        int days = int.Parse(Console.ReadLine());
         try {
+            days = int.Parse(Console.ReadLine() ?? string.Empty);
             totalKoffeeCount = koffeeFH.getKoffeeCount(days);
         }
         catch (FileNotFoundException ex) {
-            Console.WriteLine(" You have not made any Koffee purchases in the last " + days + " days.");
+            Console.WriteLine("You have not made any Koffee purchases in the last " + days + " days.");
+        }
+        catch (FormatException ex) {
+            Console.WriteLine("Enter a valid number of days.");
+            Console.WriteLine(ex.Message);
         }
 
         if (totalKoffeeCount > 0) {
@@ -167,7 +172,7 @@ class Program
 
         do {
             Console.WriteLine("Enter base Koffee price. Format is 9.99 (Dollars and cents) ");
-            price = Console.ReadLine();
+            price = Console.ReadLine() ?? string.Empty;
             if (String.IsNullOrEmpty(price)) {
                 Console.WriteLine("The price could not be read! Try again.");       
                 continue;         
@@ -204,7 +209,7 @@ class Program
             Console.WriteLine("Make a selection (use the number). Enter Exit to terminate.");
             Console.WriteLine(String.Join(Environment.NewLine, options));
 
-            option = Console.ReadLine();
+            option = Console.ReadLine() ?? string.Empty;
             if (String.IsNullOrEmpty(option)) {
                 Console.WriteLine("The input could not be read!");
                 return;
@@ -247,7 +252,10 @@ class Program
     public static void writeLogEntry(LogFileHandler logFH) {
         Console.WriteLine("Enter Log entry.");
 
-        string logData = Console.ReadLine();
+        string logData = Console.ReadLine() ?? string.Empty;
+        if (String.IsNullOrEmpty(logData)) {
+                return;
+        }
 
         try {
             logFH.writeLogEntry(logData);
@@ -262,37 +270,36 @@ class Program
         int recurCount = 0;
         int alertIntrvl = 0;
 
-
         Console.WriteLine("Enter reminder entry.");
 
         Console.WriteLine("Enter reminder trigger date (MM/DD/YYYY): ");
-        string triggerDate = Console.ReadLine();        
+        string triggerDate = Console.ReadLine() ?? string.Empty;        
         if (String.IsNullOrEmpty(triggerDate)) {            
             Console.WriteLine("Enter a date value.");
             return;
         }
 
         Console.WriteLine("Enter reminder trigger time (HH:MM AM/PM): ");
-        string triggerTime = Console.ReadLine();
+        string triggerTime = Console.ReadLine() ?? string.Empty;
         if (String.IsNullOrEmpty(triggerDate)) {
             Console.WriteLine("Enter a time value.");
             return;
         }
 
         Console.WriteLine("Enter a recurrence count (optional): ");
-        string tempVar = Console.ReadLine();
+        string tempVar = Console.ReadLine() ?? string.Empty;
         if (!String.IsNullOrEmpty(tempVar)) {
             recurCount = int.Parse(tempVar);                
         }
 
         Console.WriteLine("Enter an alert interval (optional): ");
-        tempVar = Console.ReadLine();
+        tempVar = Console.ReadLine() ?? string.Empty;
         if (!String.IsNullOrEmpty(tempVar)) {
             alertIntrvl = int.Parse(tempVar);                
         }
 
         Console.WriteLine("Enter a reminder note (optional): ");
-        string note = Console.ReadLine();
+        string note = Console.ReadLine() ?? string.Empty;
         
         Reminder reminder = new Reminder(triggerDate, triggerTime, recurCount, alertIntrvl, note); 
         try {
