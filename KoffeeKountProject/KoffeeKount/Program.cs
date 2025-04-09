@@ -146,7 +146,7 @@ class Program
 
         Console.WriteLine("Enter range in number of days: ");
         try {
-            days = int.Parse(Console.ReadLine() ?? string.Empty);
+            days = int.Parse(Console.ReadLine() ?? string.Empty);            
             totalKoffeeCount = koffeeFH.getKoffeeCount(days);
         }
         catch (FileNotFoundException ex) {
@@ -154,7 +154,8 @@ class Program
         }
         catch (FormatException ex) {
             Console.WriteLine("Enter a valid number of days.");
-            Console.WriteLine(ex.Message);
+            //Console.WriteLine(ex.Message);
+            return;
         }
 
         if (totalKoffeeCount > 0) {
