@@ -58,14 +58,27 @@ public class LogFileHandler {
 
     }
 
-    public void deleteLogFile() {
+    public void deleteLogFile(char msgFlag) {
+        //Default is do not delete the file
+        string deleteFlag = "Y";
+
         //Is there a file?
         if (!File.Exists(logFileName)) {
             Console.WriteLine("The Log entries file was not found");
         }
         else {
-            File.Delete(logFileName);
-            Console.WriteLine("The Log entries file was deleted.");
+            if (msgFlag == 'Y') {
+                Console.WriteLine("Do you want to delete the Log entries file? Reply Y or N.");
+                deleteFlag = Console.ReadLine() ?? string.Empty;                
+            }
+
+            if (deleteFlag == "Y") {
+                File.Delete(logFileName);
+                Console.WriteLine("The Log entries file was deleted.");
+            }
+            else {
+                Console.WriteLine("Log entries file was not deleted.");
+            }            
         }
     }
 }

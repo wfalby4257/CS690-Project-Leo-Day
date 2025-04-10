@@ -206,7 +206,8 @@ class Program
     public static void resetFiles(KoffeeFileHandler koffeeFH, LogFileHandler logFH, ReminderFileHandler reminderFH) {
         var options = new [] {" 1 All", " 2 Log entries", " 3 Reminders", " 4 Koffee"};
         string option = "";
-        char msgFlag = 'Y';
+        char noMsgFlag = 'N';
+        char showMsgFlag = 'Y';
         do {
             //Write menu
             Console.WriteLine("Make a selection (use the number). Enter Exit to terminate.");
@@ -221,25 +222,25 @@ class Program
             switch(option) {
                 case "1":                    
                     Console.WriteLine("All files to be deleted");
-                    logFH.deleteLogFile();
-                    reminderFH.deleteReminderFile(msgFlag);
-                    koffeeFH.deleteKoffeeFile();
+                    logFH.deleteLogFile(noMsgFlag);
+                    reminderFH.deleteReminderFile(noMsgFlag);
+                    koffeeFH.deleteKoffeeFile(noMsgFlag);
                     option = "Exit";  //Nothing more to be done
                     break;
 
                 case "2":
                     Console.WriteLine("Log entries file to be deleted");
-                    logFH.deleteLogFile();
+                    logFH.deleteLogFile(showMsgFlag);
                     break;
 
                 case "3":
                     Console.WriteLine("Reminders file to be deleted");                    
-                    reminderFH.deleteReminderFile(msgFlag);
+                    reminderFH.deleteReminderFile(showMsgFlag);
                     break;
 
                 case "4":
                     Console.WriteLine("Koffee purchases file to be deleted");
-                    koffeeFH.deleteKoffeeFile();
+                    koffeeFH.deleteKoffeeFile(showMsgFlag);
                     break;
 
                 case "Exit":

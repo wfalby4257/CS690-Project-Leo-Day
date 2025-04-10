@@ -92,13 +92,26 @@ public class KoffeeFileHandler {
         File.WriteAllText(priceFileName, koffeePrice);
     }
 
-    public void deleteKoffeeFile() {
+    public void deleteKoffeeFile(char msgFlag) {
+        //Default is do not delete the file
+        string deleteFlag = "Y";
+
         //Is there a file?
         if (!File.Exists(fileName)) {
             Console.WriteLine("The Koffee purchases file was not found");
         }
         else {
-            File.Delete(fileName);
-            Console.WriteLine("The Koffee purchases file was deleted.");
+            if (msgFlag == 'Y') {
+                Console.WriteLine("Do you want to delete the Koffee purchases file? Reply Y or N.");
+                deleteFlag = Console.ReadLine() ?? string.Empty;                
+            }
+
+            if (deleteFlag == "Y") {
+                File.Delete(fileName);
+                Console.WriteLine("The Koffee purchases file was deleted.");
+            }
+            else {
+                Console.WriteLine("Koffee purchases file was not deleted.");
+            }            
         }
     }}

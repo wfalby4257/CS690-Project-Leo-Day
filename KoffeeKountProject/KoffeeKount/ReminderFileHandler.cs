@@ -58,7 +58,7 @@ public class ReminderFileHandler {
 
     public void deleteReminderFile(char msgFlag) {
         //Default is do not delete the file
-        string deleteFlag = "N";
+        string deleteFlag = "Y";
         
         //Is there a file?
         if (!File.Exists(reminderFileName)) {
