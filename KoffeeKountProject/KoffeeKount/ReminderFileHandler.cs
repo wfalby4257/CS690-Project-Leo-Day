@@ -56,14 +56,24 @@ public class ReminderFileHandler {
 
     }
 
-    public void deleteReminderFile() {
+    public void deleteReminderFile(char msgFlag) {
         //Is there a file?
         if (!File.Exists(reminderFileName)) {
             Console.WriteLine("The Reminder entries file was not found");
         }
         else {
-            File.Delete(reminderFileName);
-            Console.WriteLine("The Reminder entries file was deleted.");
+            if (msgFlag == 'Y') {
+                Console.WriteLine("Do you want to delete the Reminder file? Reply Y or N.");
+                string inputFlag = Console.ReadLine();
+
+                if (inputFlag == "Y") {
+                    File.Delete(reminderFileName);
+                    Console.WriteLine("The Reminder entries file was deleted.");
+                }
+                else {
+                    Console.WriteLine("Reminder file was not deleted.");
+                }
+            }            
         }
     }
 }
