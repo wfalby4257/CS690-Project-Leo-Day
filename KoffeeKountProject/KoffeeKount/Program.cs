@@ -131,6 +131,7 @@ class Program
             cupOfKoffee.showKoffee();
             try {
                 koffeeFH.writeKoffeeInfo(cupOfKoffee);
+                Console.WriteLine("You've purchased a cup of " + koffeeType + " for " + koffeePrice + ".");
             }
             catch (ArgumentException ex) {
                 Console.WriteLine("Failed writing Koffee data!");
