@@ -57,7 +57,9 @@ public class ReminderFileHandler {
     }
 
     public void deleteReminderFile(char msgFlag) {
-        char deleteFlag = 'Y';
+        //Default is do not delete the file
+        string deleteFlag = "N";
+        
         //Is there a file?
         if (!File.Exists(reminderFileName)) {
             Console.WriteLine("The Reminder entries file was not found");
