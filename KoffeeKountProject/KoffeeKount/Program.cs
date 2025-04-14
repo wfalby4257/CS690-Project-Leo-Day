@@ -46,7 +46,7 @@ class Program
                 listLogEntries(logFH);
             }
             else if (selection == "7") {
-                koffeeUI.setBaseKoffeePrice(koffeeFH);
+                koffeePrice = koffeeUI.setBaseKoffeePrice(koffeeFH);
             }
             else if (selection == "8") {
                 resetFiles(koffeeFH, logFH, reminderFH);

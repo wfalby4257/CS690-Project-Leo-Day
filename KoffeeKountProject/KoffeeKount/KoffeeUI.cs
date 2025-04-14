@@ -113,7 +113,7 @@ public class KoffeeUI {
         }
     }
 
-    public void setBaseKoffeePrice(KoffeeFileHandler koffeeFH) {
+    public string setBaseKoffeePrice(KoffeeFileHandler koffeeFH) {
         char validPrice = 'N';
         string price = "";
         string pattern = @"^[0-9]*\.?[0-9]+$";
@@ -139,5 +139,6 @@ public class KoffeeUI {
         //Valid price entered, save it.
         koffeeFH.setBaseKoffeePrice(price);
         Console.WriteLine("Base price " + price + " saved.");
+        return price;
     }
 }
