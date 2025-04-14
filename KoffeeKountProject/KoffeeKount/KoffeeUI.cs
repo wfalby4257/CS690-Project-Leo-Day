@@ -6,9 +6,9 @@ public class KoffeeUI {
     public KoffeeFileHandler koffeeFH;
     string koffeePrice;
 
-    public KoffeeUI () {
+    public KoffeeUI (KoffeeFileHandler koffeeFH) {
         //Get the base price for cup of Koffee
-    this.koffeeFH = new KoffeeFileHandler();
+    this.koffeeFH = koffeeFH;
     this.koffeePrice = koffeeFH.getKoffeePrice();
     }
 

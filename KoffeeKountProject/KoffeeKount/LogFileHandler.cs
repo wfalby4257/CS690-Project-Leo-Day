@@ -2,7 +2,11 @@ namespace KoffeeKount;
 using System.IO;
 
 public class LogFileHandler {
-    string logFileName = "LogEntries.txt";
+    string logFileName;
+
+    public LogFileHandler(string fileName) {
+        this.logFileName = fileName;
+    }
 
     public void writeLogEntry(string logEntry) {
         //If file not found, create it

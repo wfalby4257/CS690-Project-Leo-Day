@@ -10,15 +10,20 @@ class Program
                                 " ", " 99 Exit"};
         string selection = "";
         
+        string fileName = "KoffeePurchases.txt";
+        string priceFileName = "KoffeePrice.txt";
+
         //Get the base price for cup of Koffee
-        KoffeeFileHandler koffeeFH = new KoffeeFileHandler();
+        KoffeeFileHandler koffeeFH = new KoffeeFileHandler(fileName, priceFileName);
         string koffeePrice = koffeeFH.getKoffeePrice();
 
-        KoffeeUI koffeeUI = new KoffeeUI();
+        KoffeeUI koffeeUI = new KoffeeUI(koffeeFH);
 
-        LogFileHandler logFH = new LogFileHandler();
+        string logFileName = "LogEntries.txt";
+        LogFileHandler logFH = new LogFileHandler(logFileName);
 
-        ReminderFileHandler reminderFH = new ReminderFileHandler();
+        string reminderFileName = "ReminderEntries.txt";
+        ReminderFileHandler reminderFH = new ReminderFileHandler(reminderFileName);
 
         do {
             //Write main menu to console

@@ -2,28 +2,34 @@ namespace KoffeeKount;
 using System.IO;
 
 public class KoffeeFileHandler {
-    string fileName = "KoffeePurchases.txt";
-    string priceFileName = "KoffeePrice.txt";
+    string fileName;
+    string priceFileName;
+
+    public KoffeeFileHandler(string koffeePurchaseFile, string koffeePriceFile) {
+        this.fileName = koffeePurchaseFile;
+        this.priceFileName = koffeePriceFile;
+    }
+
     public string getKoffeePrice() {
         string koffeePrice = "";
         try {
             // Open the text file using a stream reader.
-            using StreamReader reader = new("KoffeePrice.txt");
+            using StreamReader reader = new(priceFileName);
 
             // Read the stream as a string.
             koffeePrice = reader.ReadLine() ?? string.Empty;
             if (String.IsNullOrEmpty(koffeePrice)) {
-                throw new ArgumentException("The file could not be read!");
+                throw new ArgumentException("The Koffee price file could not be read!");
             }
             return(koffeePrice);
         }
         catch (FileNotFoundException ex) {
             Console.WriteLine(ex.Message);
-            return("The file was not found");
+            return("The Koffee price file was not found");
         }
         catch (IOException ex) {
             Console.WriteLine(ex.Message);
-            return("The file could not be read!");
+            return("The Koffee price file could not be read!");
         }
     }
 

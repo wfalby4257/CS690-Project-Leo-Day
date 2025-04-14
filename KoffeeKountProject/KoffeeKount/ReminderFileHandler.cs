@@ -2,7 +2,11 @@ namespace KoffeeKount;
 using System.IO;
 
 public class ReminderFileHandler {
-    string reminderFileName = "ReminderEntries.txt";
+    string reminderFileName;
+
+    public ReminderFileHandler(string fileName) {
+        this.reminderFileName = fileName;
+    }
 
     public void writeReminderEntry(Reminder reminderEntry) {
         //If file not found, create it
