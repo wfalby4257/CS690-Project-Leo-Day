@@ -17,7 +17,7 @@ public class ReminderFileHandler {
         }
 
         //Write data to file
-        string strData = string.Format("{0},{1},{2},{3},{4},{5};", reminderEntry.dateAdded, reminderEntry.triggerDate, reminderEntry.triggerTime, reminderEntry.recurCount, reminderEntry.alertIntrvl, reminderEntry.note);
+        string strData = string.Format("{0},{1},{2},{3},{4},{5};", reminderEntry.dateAdded, reminderEntry.title, reminderEntry.triggerDate, reminderEntry.triggerTime, reminderEntry.alertIntrvl, reminderEntry.note);
         File.AppendAllText(reminderFileName, strData);
     }
 
@@ -43,10 +43,10 @@ public class ReminderFileHandler {
             
                 fields = reminderEntry.Split(',');
                 Console.WriteLine("Reminder entry: ");
-                Console.WriteLine("Reminder entry added date: " + fields[0]);            
-                Console.WriteLine("trigger date = " + fields[1]);
-                Console.WriteLine("trigger time = " + fields[2]);
-                Console.WriteLine("recurrence count = " + fields[3]);
+                Console.WriteLine("Reminder entry added date: " + fields[0]);    
+                Console.WriteLine("title = " + fields[1]);        
+                Console.WriteLine("trigger date = " + fields[2]);
+                Console.WriteLine("trigger time = " + fields[3]);
                 Console.WriteLine("alert interval = " + fields[4]);
                 if (!String.IsNullOrEmpty(fields[5])) {
                     Console.WriteLine("reminder note = " + fields[5]);

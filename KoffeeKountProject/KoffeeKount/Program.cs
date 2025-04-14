@@ -23,39 +23,30 @@ class Program
             Console.WriteLine("Select one of the following actions (use the number). Enter 99 to terminate.");
             Console.WriteLine(String.Join(Environment.NewLine, selections));
 
-            Console.WriteLine("About to issue ReadLine.");
             selection = Console.ReadLine() ?? string.Empty;
-            Console.WriteLine("selection = " + selection);
+            Console.Clear();
             if (selection == "1") {
-                Console.WriteLine("Buy a Koffee was selected.");
                 buyAKoffee(koffeePrice, koffeeFH);
             }
             else if (selection == "2") {
-                Console.WriteLine("Get Koffee count was selected.");
                 getKoffeeCount(koffeeFH);
             }
             else if (selection == "3") {
-                Console.WriteLine("Set a Reminder was selected.");
                 writeReminderEntry(reminderFH);
             }
             else if (selection == "4") {
-                Console.WriteLine("Create a Log entry was selected.");
                 writeLogEntry(logFH);
             }
             else if (selection == "5") {
-                Console.WriteLine("List Reminders was selected.");
                 listReminderEntries(reminderFH);
             }
             else if (selection == "6") {
-                Console.WriteLine("List Log entries was selected.");
                 listLogEntries(logFH);
             }
             else if (selection == "7") {
-                Console.WriteLine("Set base Koffee price was selected.");
                 setBaseKoffeePrice(koffeeFH);
             }
             else if (selection == "8") {
-                Console.WriteLine("Reset files was selected.");
                 resetFiles(koffeeFH, logFH, reminderFH);
             }
             else if (selection == "99") {
@@ -85,7 +76,6 @@ class Program
 
             switch (type) {
                 case "1":
-                    Console.WriteLine("Americano selected");
                     koffeeType = "Americano";                
                     typeSelected = 'Y';
                     break;
@@ -93,25 +83,21 @@ class Program
                 case "2":
                     koffeeType = "Cappuccino";                
                     typeSelected = 'Y';
-                    Console.WriteLine("Cappuccino selected");
                     break;
 
                 case "3":
                     koffeeType = "DoubleDouble";                
                     typeSelected = 'Y';
-                    Console.WriteLine("DoubleDouble selected");
                     break;
 
                 case "4":                
                     koffeeType = "Expresso";
                     typeSelected = 'Y';
-                    Console.WriteLine("Expresso selected");
                     break;
 
                 case "5":
                     koffeeType = "Latte";            
                     typeSelected = 'Y';    
-                    Console.WriteLine("Latte selected");
                     break;
 
                 case "Exit":
@@ -128,7 +114,7 @@ class Program
             typeSelected = 'N';
 
             Koffee cupOfKoffee = new Koffee(double.Parse(koffeePrice), 1, koffeeType);
-            cupOfKoffee.showKoffee();
+            //cupOfKoffee.showKoffee();
             try {
                 koffeeFH.writeKoffeeInfo(cupOfKoffee);
                 Console.WriteLine("You've purchased a cup of " + koffeeType + " for " + koffeePrice + ".");
@@ -229,17 +215,14 @@ class Program
                     break;
 
                 case "2":
-                    Console.WriteLine("Log entries file to be deleted");
                     logFH.deleteLogFile(showMsgFlag);
                     break;
 
                 case "3":
-                    Console.WriteLine("Reminders file to be deleted");                    
                     reminderFH.deleteReminderFile(showMsgFlag);
                     break;
 
                 case "4":
-                    Console.WriteLine("Koffee purchases file to be deleted");
                     koffeeFH.deleteKoffeeFile(showMsgFlag);
                     break;
 
@@ -271,10 +254,14 @@ class Program
     }
 
     public static void writeReminderEntry(ReminderFileHandler reminderFH) {        
-        int recurCount = 0;
         int alertIntrvl = 0;
 
-        Console.WriteLine("Enter reminder entry.");
+        Console.WriteLine("Enter reminder title: ");
+        string title = Console.ReadLine() ?? string.Empty;        
+        if (String.IsNullOrEmpty(title)) {            
+            Console.WriteLine("Enter a title.");
+            return;
+        }
 
         Console.WriteLine("Enter reminder trigger date (MM/DD/YYYY): ");
         string triggerDate = Console.ReadLine() ?? string.Empty;        
@@ -290,14 +277,8 @@ class Program
             return;
         }
 
-        Console.WriteLine("Enter a recurrence count (optional): ");
-        string tempVar = Console.ReadLine() ?? string.Empty;
-        if (!String.IsNullOrEmpty(tempVar)) {
-            recurCount = int.Parse(tempVar);                
-        }
-
         Console.WriteLine("Enter an alert interval (optional): ");
-        tempVar = Console.ReadLine() ?? string.Empty;
+        string tempVar = Console.ReadLine() ?? string.Empty;
         if (!String.IsNullOrEmpty(tempVar)) {
             alertIntrvl = int.Parse(tempVar);                
         }
@@ -305,10 +286,10 @@ class Program
         Console.WriteLine("Enter a reminder note (optional): ");
         string note = Console.ReadLine() ?? string.Empty;
         
-        Reminder reminder = new Reminder(triggerDate, triggerTime, recurCount, alertIntrvl, note); 
+        Reminder reminder = new Reminder(title, triggerDate, triggerTime, alertIntrvl, note); 
         try {
             reminderFH.writeReminderEntry(reminder);
-            Console.WriteLine("Reminder set for " + triggerDate + " at " + triggerTime + ".");
+            Console.WriteLine("Reminder: " + title + " set for " + triggerDate + " at " + triggerTime + ".");
         }
         catch (ArgumentException ex) {
             Console.WriteLine(ex.Message);
@@ -316,7 +297,6 @@ class Program
     }
 
     public static void listReminderEntries(ReminderFileHandler reminderFH) {
-        Console.WriteLine("listReminderEntries entered.");
         try {
             reminderFH.listReminderEntries();
         }

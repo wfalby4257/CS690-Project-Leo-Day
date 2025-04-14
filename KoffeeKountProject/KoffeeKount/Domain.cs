@@ -28,16 +28,17 @@ public class Koffee {
 
 public class Reminder {
     public DateTime dateAdded;
+    public string title;
     public string triggerDate;
     public string triggerTime;
-    public int recurCount;
+    
     public int alertIntrvl;
     public string note;
 
-    public Reminder(string triggerDate, string triggerTime, int recurCount = 0, int alertIntrvl = 0, string note = "") {
+    public Reminder(string title, string triggerDate, string triggerTime, int alertIntrvl = 0, string note = "") {
+        this.title = title;
         this.triggerDate = triggerDate;
-        this.triggerTime = triggerTime;        
-        this.recurCount = recurCount;
+        this.triggerTime = triggerTime;     
         this.alertIntrvl = alertIntrvl;
         this.note = note;
 
@@ -45,10 +46,10 @@ public class Reminder {
     }
 
     public void showReminder() {
+        Console.WriteLine("title = " + title);
         Console.WriteLine("triggerDate = " + triggerDate);
         Console.WriteLine("triggerTime = " + triggerTime);
         Console.WriteLine("dateAdded = " + dateAdded);
-        Console.WriteLine("recurCount = " + recurCount);
         Console.WriteLine("alertIntrvl = " + alertIntrvl);
 
         if (!String.IsNullOrEmpty(note)) {
