@@ -10,13 +10,17 @@ class Program
                                 " ", " 99 Exit"};
         string selection = "";
         
+        /*
+        Put these lines here rather than in method later in the code so next developer sees them first.
+        The file names are here so they are easily known. Passing the names to the file handler
+        constructor makes for easier automated testing. Objects are created here to ensure they are created 
+        only once.
+        */
         string fileName = "KoffeePurchases.txt";
         string priceFileName = "KoffeePrice.txt";
-
-        //Get the base price for cup of Koffee
         KoffeeFileHandler koffeeFH = new KoffeeFileHandler(fileName, priceFileName);
+        //Get the base price for cup of Koffee
         string koffeePrice = koffeeFH.getKoffeePrice();
-
         KoffeeUI koffeeUI = new KoffeeUI(koffeeFH);
 
         string logFileName = "LogEntries.txt";
@@ -24,6 +28,7 @@ class Program
 
         string reminderFileName = "ReminderEntries.txt";
         ReminderFileHandler reminderFH = new ReminderFileHandler(reminderFileName);
+        ReminderUI reminderUI = new ReminderUI(reminderFH);
 
         do {
             //Write main menu to console
@@ -33,13 +38,13 @@ class Program
             selection = Console.ReadLine() ?? string.Empty;
             Console.Clear();
             if (selection == "1") {
-                koffeeUI.buyAKoffee(koffeePrice, koffeeFH);
+                koffeeUI.buyAKoffee(koffeePrice);
             }
             else if (selection == "2") {
-                koffeeUI.getKoffeeCount(koffeeFH);
+                koffeeUI.getKoffeeCount();
             }
             else if (selection == "3") {
-                writeReminderEntry(reminderFH);
+                reminderUI.writeReminderEntry();
             }
             else if (selection == "4") {
                 writeLogEntry(logFH);
@@ -51,7 +56,7 @@ class Program
                 listLogEntries(logFH);
             }
             else if (selection == "7") {
-                koffeePrice = koffeeUI.setBaseKoffeePrice(koffeeFH);
+                koffeePrice = koffeeUI.setBaseKoffeePrice();
             }
             else if (selection == "8") {
                 resetFiles(koffeeFH, logFH, reminderFH);
@@ -61,50 +66,6 @@ class Program
             }
             
         } while (selection != "99");
-    }
-
-
-    public static void writeReminderEntry(ReminderFileHandler reminderFH) {        
-        int alertIntrvl = 0;
-
-        Console.WriteLine("Enter reminder title: ");
-        string title = Console.ReadLine() ?? string.Empty;        
-        if (String.IsNullOrEmpty(title)) {            
-            Console.WriteLine("Enter a title.");
-            return;
-        }
-
-        Console.WriteLine("Enter reminder trigger date (MM/DD/YYYY): ");
-        string triggerDate = Console.ReadLine() ?? string.Empty;        
-        if (String.IsNullOrEmpty(triggerDate)) {            
-            Console.WriteLine("Enter a date value.");
-            return;
-        }
-
-        Console.WriteLine("Enter reminder trigger time (HH:MM AM/PM): ");
-        string triggerTime = Console.ReadLine() ?? string.Empty;
-        if (String.IsNullOrEmpty(triggerDate)) {
-            Console.WriteLine("Enter a time value.");
-            return;
-        }
-
-        Console.WriteLine("Enter an alert interval (optional): ");
-        string tempVar = Console.ReadLine() ?? string.Empty;
-        if (!String.IsNullOrEmpty(tempVar)) {
-            alertIntrvl = int.Parse(tempVar);                
-        }
-
-        Console.WriteLine("Enter a reminder note (optional): ");
-        string note = Console.ReadLine() ?? string.Empty;
-        
-        Reminder reminder = new Reminder(title, triggerDate, triggerTime, alertIntrvl, note); 
-        try {
-            reminderFH.writeReminderEntry(reminder);
-            Console.WriteLine("Reminder: " + title + " set for " + triggerDate + " at " + triggerTime + ".");
-        }
-        catch (ArgumentException ex) {
-            Console.WriteLine(ex.Message);
-        }
     }
 
     public static void writeLogEntry(LogFileHandler logFH) {

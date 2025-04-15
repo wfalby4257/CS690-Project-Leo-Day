@@ -12,13 +12,11 @@ public class KoffeeUI {
     this.koffeePrice = koffeeFH.getKoffeePrice();
     }
 
-    public void buyAKoffee(string koffeePrice, KoffeeFileHandler koffeeFH) {
+    public void buyAKoffee(string koffeePrice) {
         var types = new [] {" 1 Americano", " 2 Cappuccino", " 3 DoubleDouble", " 4 Expresso", " 5 Latte"};
         string type = "";
         string koffeeType = "";
         char typeSelected = 'N';
-
-        Console.WriteLine("Entered new class.");
 
         do {
             //Write menu
@@ -85,10 +83,9 @@ public class KoffeeUI {
         }            
     }
 
-    public void getKoffeeCount(KoffeeFileHandler koffeeFH) {
+    public void getKoffeeCount() {
         int totalKoffeeCount = 0;
         int days = 0;
-        Console.WriteLine("Entered new class.");
 
         Console.WriteLine("Enter range in number of days: ");
         try {
@@ -113,11 +110,10 @@ public class KoffeeUI {
         }
     }
 
-    public string setBaseKoffeePrice(KoffeeFileHandler koffeeFH) {
+    public string setBaseKoffeePrice() {
         char validPrice = 'N';
         string price = "";
         string pattern = @"^[0-9]*\.?[0-9]+$";
-        Console.WriteLine("Entered new class.");
 
         do {
             Console.WriteLine("Enter base Koffee price. Format is 9.99 (Dollars and cents) ");
