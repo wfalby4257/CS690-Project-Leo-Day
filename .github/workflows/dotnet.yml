@@ -22,10 +22,10 @@ jobs:
         dotnet-version: 8.0.x
     - name: Restore dependencies
       run: dotnet restore
-      working-directory: ./KoffeeKount
+      working-directory: KoffeeKount
     - name: Build
       run: dotnet build --no-restore
-      working-directory: ./KoffeeKount
+      working-directory: KoffeeKount
     - name: Test
       run: dotnet test --no-build --verbosity normal
-      working-directory: ./KoffeeKount
+      working-directory: KoffeeKount
